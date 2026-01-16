@@ -1,0 +1,10 @@
+# Build folders
+target/
+out/
+bin/
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+

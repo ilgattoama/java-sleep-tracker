@@ -1,4 +1,8 @@
+package ru.yandex.practicum.sleeptracker.functions;
+
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.sleeptracker.core.SleepQuality;
+import ru.yandex.practicum.sleeptracker.core.SleepingSession;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -63,6 +67,13 @@ public class SleeplessNightsFunctionTest {
                 )
         );
 
+        SleeplessNightsFunction f = new SleeplessNightsFunction();
+        assertEquals(0L, f.analyze(sessions).getValue());
+    }
+
+    @Test
+    void sleeplessNights_emptyList() {
+        List<SleepingSession> sessions = List.of();
         SleeplessNightsFunction f = new SleeplessNightsFunction();
         assertEquals(0L, f.analyze(sessions).getValue());
     }

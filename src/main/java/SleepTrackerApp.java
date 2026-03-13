@@ -1,4 +1,9 @@
-import src.*;
+import ru.yandex.practicum.sleeptracker.core.SleepAnalysisFunction;
+import ru.yandex.practicum.sleeptracker.core.SleepAnalysisResult;
+import ru.yandex.practicum.sleeptracker.core.SleepQuality;
+import ru.yandex.practicum.sleeptracker.core.SleepingSession;
+import ru.yandex.practicum.sleeptracker.functions.*;
+import ru.yandex.practicum.sleeptracker.core.*;
 
 import java.io.*;
 import java.time.LocalDateTime;
@@ -15,7 +20,7 @@ public class SleepTrackerApp {
         functions.add(new MinDurationFunction());
         functions.add(new MaxDurationFunction());
         functions.add(new AvgDurationFunction());
-        functions.add(new BadSleepCountFumction());
+        functions.add(new BadSleepCountFunction());
         functions.add(new SleeplessNightsFunction());
         functions.add(new ChronotypeFunction());
     }
@@ -37,14 +42,16 @@ public class SleepTrackerApp {
 
     public List<SleepingSession> readSleepLog(String filepath) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
-        return new BufferedReader(new FileReader(filepath))
-                .lines()
-                .map(line -> line.split(";"))
-                .map(parts -> new SleepingSession(
-                        LocalDateTime.parse(parts[0], formatter),
-                        LocalDateTime.parse(parts[1], formatter),
-                        SleepQuality.valueOf(parts[2])
-                ))
-                .collect(Collectors.toList());
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filepath))) {
+            return reader.lines()
+                    .map(line -> line.split(";"))
+                    .map(parts -> new SleepingSession(
+                            LocalDateTime.parse(parts[0], formatter),
+                            LocalDateTime.parse(parts[1], formatter),
+                            SleepQuality.valueOf(parts[2])
+                    ))
+                    .collect(Collectors.toList());
+        }
     }
 }

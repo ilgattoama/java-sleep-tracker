@@ -1,4 +1,8 @@
+package ru.yandex.practicum.sleeptracker.functions;
+
 import org.junit.jupiter.api.Test;
+import ru.yandex.practicum.sleeptracker.core.SleepQuality;
+import ru.yandex.practicum.sleeptracker.core.SleepingSession;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,3 +1,5 @@
+package ru.yandex.practicum.sleeptracker.core;
+
 public class SleepAnalysisResult<T> {
     private String description;
     private T value;

@@ -1,3 +1,6 @@
+package ru.yandex.practicum.sleeptracker.functions;
+
+import ru.yandex.practicum.sleeptracker.core.*;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -5,10 +8,10 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class MinDurationFunctionTest {
+public class AvgDurationFunctionTest {
 
     @Test
-    void minDuration_basicCase() {
+    void avgDuration_basicCase() {
         List<SleepingSession> sessions = List.of(
                 new SleepingSession(
                         LocalDateTime.of(2025, 10, 1, 22, 0),
@@ -16,18 +19,18 @@ public class MinDurationFunctionTest {
                         SleepQuality.GOOD
                 ),
                 new SleepingSession(
-                        LocalDateTime.of(2025, 10, 3, 14, 0),
-                        LocalDateTime.of(2025, 10, 3, 15, 0),
+                        LocalDateTime.of(2025, 10, 2, 14, 0),
+                        LocalDateTime.of(2025, 10, 2, 15, 0),
                         SleepQuality.NORMAL
                 )
         );
 
-        MinDurationFunction f = new MinDurationFunction();
-        assertEquals(60, f.analyze(sessions).getValue());
+        AvgDurationFunction f = new AvgDurationFunction();
+        assertEquals(270.0, f.analyze(sessions).getValue());
     }
 
     @Test
-    void minDuration_singleSession() {
+    void avgDuration_singleSession() {
         List<SleepingSession> sessions = List.of(
                 new SleepingSession(
                         LocalDateTime.of(2025, 10, 1, 23, 0),
@@ -36,7 +39,7 @@ public class MinDurationFunctionTest {
                 )
         );
 
-        MinDurationFunction f = new MinDurationFunction();
-        assertEquals(480, f.analyze(sessions).getValue());
+        AvgDurationFunction f = new AvgDurationFunction();
+        assertEquals(480.0, f.analyze(sessions).getValue());
     }
 }

@@ -1,3 +1,5 @@
+package ru.yandex.practicum.sleeptracker.core;
+
 import java.util.List;
 
 @FunctionalInterface
